@@ -222,4 +222,18 @@ GPIO.add_event_detect(display_,	GPIO.RISING,	callback=display, bouncetime=200)
 
 
 
+while (True and (stopper!=1)): # Read the data
 
+    sensr_data = GetData(2)
+
+    sensor_volt = ConvertVolts(sensr_data,2)
+
+    temp_data = GetData(1)
+
+    temp_val= ConvertTemp(temp_data,2)
+
+    light_data= GetData(0)
+
+    light_val = ConvertLight(light_data,0)
+
+    out=Time_display(time.time())+ " " +Time_display(time.time()-start) + " "+"{}V {}C {}%".format(sensr_data,
