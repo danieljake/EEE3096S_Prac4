@@ -236,4 +236,30 @@ while (True and (stopper!=1)): # Read the data
 
     light_val = ConvertLight(light_data,0)
 
-    out=Time_display(time.time())+ " " +Time_display(time.time()-start) + " "+"{}V {}C {}%".format(sensr_data,
+    out=Time_display(time.time())+ " " +Time_display(time.time()-start) + " "+"{}V {}C {}%".format(sensr_data,temp_val,light_val)
+
+    if (stop_start==0):
+
+        print ("___________________________________")
+
+        print ("Time     Timer    Pot  Temp   Light")
+
+        print ("___________________________________")
+
+        print (out)
+
+    elif ((stop_start==1)and(counter<6)):
+
+        space= space + "\n" +out
+
+        counter=counter+1
+
+        #stopper=1
+
+
+
+
+
+    elif ((stop_start==1) and (counter ==0)):
+
+        out=Time_display(time.time())+ " " +Time_display(time.time()-time.time()) + " "+"{}V {}C {}%".format(sensr_data,
