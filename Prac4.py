@@ -115,3 +115,111 @@ def Time_display(t):
 #channel = 0 # Define delay between readings
 
 delay = 0.5
+
+### Interrupt switches
+
+start=time.time()
+
+out=""
+
+space=""
+
+counter=0
+
+stopper=0
+
+stop_start=0
+
+def reset(channel):
+
+    global start
+
+    global space
+
+    global counter
+
+    space=""
+
+    counter=0
+
+    print ("RESET")
+
+    system("clear")
+
+def freq(channel):
+
+    global delay
+
+    print(delay)
+
+    if (delay==0.5):
+
+        print("Test")
+
+        delay= 1
+
+        print(delay)
+
+
+
+    elif(delay ==1):
+
+        delay= 2
+
+
+
+    elif (delay== 2):
+
+        delay =0.5
+
+
+
+def stop(channel):
+
+    global stop_start
+
+    global counter
+
+    if (stop_start==0):
+
+        print("stop")
+
+        stop_start=1
+
+
+
+    elif (stop_start==1):
+
+        print("continue")
+
+        stop_start=0
+
+        counter=0
+
+        stopper=0
+
+def display(channel):
+
+    global stop_start
+
+    if(stop_start==1):
+
+        print("Time     Timer    Pot  Temp   Light")
+
+        print(space)
+
+
+
+
+
+GPIO.add_event_detect(reset_,	GPIO.RISING,	callback=reset,	bouncetime=200)
+
+GPIO.add_event_detect(freq_,	GPIO.RISING,	callback=freq, bouncetime=200)
+
+GPIO.add_event_detect(stop_,	GPIO.RISING,	callback=stop, bouncetime=200)
+
+GPIO.add_event_detect(display_,	GPIO.RISING,	callback=display, bouncetime=200)
+
+
+
+
