@@ -61,3 +61,57 @@ GPIO.setwarnings(False)
 #GPIO.setup(SPICLK,GPIO.OUT)
 
 #GPIO.setup(SPICS,GPIO.OUT)
+
+def GetData(channel): # channel must be an integer 0-7
+
+    adc = spi.xfer2([1,(8+channel)<<4,0]) # sending 3 bytes
+
+    data = ((adc[1]&3) << 8) + adc[2]
+
+    return data
+
+#places=1
+
+def ConvertVolts(data,places):
+
+    volts = ((data * 3.3) / float(1023))/1000
+
+    volts = round(volts,places)
+
+    return volts
+
+
+
+def ConvertTemp(volts,places):
+
+    temp= (volts-0.5)/100
+
+    temp= round(temp,places)
+
+    return temp
+
+
+
+def ConvertLight(data,places):
+
+    light = (data/float(1023))*100
+
+    # Define sensor channels
+
+    light= round(light,0)
+
+    return light
+
+
+
+def Time_display(t):
+
+    set_time=time.localtime(t)
+
+    return(str(set_time.tm_min).zfill(2)+":"+str(set_time.tm_sec).zfill(2)+":"+str(t-int(t))[2:4])
+
+
+
+#channel = 0 # Define delay between readings
+
+delay = 0.5
